@@ -8,5 +8,11 @@ int main(int argc, char** argv){
     
     dgen::MapGenerator mapGen;
 
+    if(mapGen.generate()){
+        std::cout << "Created map\n";
+    }else{
+        std::cout << "Failed to create map\n";
+    }
+
     return 0;
 }
