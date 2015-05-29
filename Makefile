@@ -8,6 +8,10 @@ AR=ar
 #Archive flags
 LFLAGS=rvs
 
+LFILE=libDgen.a
+
+RM=rm -f
+
 #Source files.
 SOURCES=lib/MapGenerator.cpp
 
@@ -23,7 +27,7 @@ example: lib
 lib: $(OBJECTS)
 	@echo ""
 	@echo "Creating library object"
-	$(AR) $(LFLAGS) libDgen.a $(OBJECTS)
+	$(AR) $(LFLAGS) $(LFILE) $(OBJECTS)
 
 $(OBJECTS): %.o: %.cpp
 	@echo ""
@@ -31,6 +35,12 @@ $(OBJECTS): %.o: %.cpp
 	$(RM) $@.d
 	$(CC) $(CFLAGS) $@.d -o $@ $<
 
-clean:
-	rm *.o
-	rm *.o.d
+clean: clean_examples
+	$(RM) lib/*.o
+	$(RM) lib/*.o.d
+	$(RM) $(LFILE) 
+
+clean_examples:
+	$(RM) examples/*.o
+	$(RM) examples/*.o.d
+	$(RM) *.out
