@@ -33,14 +33,51 @@ int MapGenerator::getSeed(){
  * @return true if map generated, false otherwise.
  */
 bool MapGenerator::generate(){
-    if(!isSeeded){
-        seed = 0;
-    }else{
+   
+    //Setup rand 
+    if(!isSeeded)
         seed = time(NULL);
-    }
     srand(seed);
 
+    clean();
+
+    //Attempt map generation
+    if(isSeeded){
+        numAttempts = 1;
+        return generateMap();
+    }else{
+        for(numAttempts = 0; numAttempts < maxAttempts; numAttempts++){
+            if(generateMap())
+                return true;
+        } 
+    }
+
     return false;
+}
+
+/**
+ * Map generating logic.
+ * @return true if map generated, false otherwise.
+ */
+bool MapGenerator::generateMap(){
+    hasGeneratedMap = false;
+    
+    return hasGeneratedMap;  
+}
+
+/**
+ * Cleans up any generated map data.
+ */
+void MapGenerator::clean(){
+    hasGeneratedMap = false;
+    for(int i = 0; i < areas.size(); i++){
+        delete areas[i];
+    }
+    areas.clear();
+}
+
+MapGenerator::~MapGenerator(){
+    clean();
 }
 
 }
