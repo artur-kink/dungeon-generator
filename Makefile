@@ -13,7 +13,8 @@ LFILE=libDgen.a
 RM=rm -f
 
 #Source files.
-SOURCES=lib/MapGenerator.cpp
+SOURCES=lib/MapGenerator.cpp \
+		lib/RoomTemplate.cpp
 
 OBJECTS=$(SOURCES:.cpp=.o)
 

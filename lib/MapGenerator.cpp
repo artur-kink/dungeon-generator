@@ -44,15 +44,15 @@ bool MapGenerator::generate(){
     //Attempt map generation
     if(isSeeded){
         numAttempts = 1;
-        return generateMap();
+        generateMap();
     }else{
         for(numAttempts = 0; numAttempts < maxAttempts; numAttempts++){
             if(generateMap())
-                return true;
+                break;
         } 
     }
 
-    return false;
+    return hasGeneratedMap;
 }
 
 /**
